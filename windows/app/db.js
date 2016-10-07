@@ -2,7 +2,8 @@
 
 
 var CONF = require('./config');
-var {connect,Document} = require('camo');
+var camo = require('camo');
+var {connect,Document} = camo;
 
 module.exports = class Database {
 
@@ -12,12 +13,7 @@ module.exports = class Database {
     var uri = 'nedb://' + conf.dataPath;
     console.log('ok', uri,conf);
 
-    connect(uri).then(function (db) {
-      console.log('connected',db);
-      _self.db = db;
-      _self.Document = Document;
-      cb.call(this,_self);
-    });
+    connect(uri).then(cb);
   }
 };
 

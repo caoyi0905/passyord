@@ -50,7 +50,7 @@ export default class Sidebar extends React.Component {
         <Drawer style={styles.drawer} containerStyle={styles.containerDrawer} open={true} swipeAreaWidth={256}>
           <MenuItem primaryText='登录信息' leftIcon={<Lock color={styles.svgColor}/>} menuItems={this.getLoginMenu() }>
           </MenuItem>
-          <MenuItem primaryText='银行账户' leftIcon={<CreditCard color={styles.svgColor}/>} menuItems={getBankMenu() }>
+          <MenuItem primaryText='银行账户' leftIcon={<CreditCard color={styles.svgColor}/>} menuItems={this.getBankMenu() }>
           </MenuItem>
           <MenuItem style={styles.logoutBtn} primaryText='登出' leftIcon={<Back color={styles.svgColor}/>} onClick={this._handleLogout.bind(this) }>
           </MenuItem>
@@ -59,34 +59,37 @@ export default class Sidebar extends React.Component {
     );
   }
 
-  menuClick(svg) {
-    emitter.emit('menuClick',svg);
+  loginMenuClick(svg) {
+    emitter.emit('LoginMenuClick', svg);
+  }
+
+  bankMenuClick(bank) {
+    emitter.emit('BankMenuClick', bank);
   }
 
   getLoginMenu() {
     let loginMenu = [];
-    for(let svg in svgs){
-      let {Icon,viewBox,text} = svgs[svg];
+    for (let svg in svgs) {
+      let {Icon, viewBox, text} = svgs[svg];
       loginMenu.push(
-        <MenuItem primaryText={text} leftIcon={<Icon color={styles.svgColor} viewBox={viewBox}/>} onTouchTap={this.menuClick.bind(this,svg)}/>
+        <MenuItem primaryText={text} leftIcon={<Icon color={styles.svgColor} viewBox={viewBox}/>} onTouchTap={this.loginMenuClick.bind(this, svg) }/>
       )
     }
     return loginMenu;
   }
+
+  getBankMenu() {
+    let bankList = ['中国银行', '农业银行', '建设银行', '工商银行', '交通银行', '招商银行'];
+    let loginMenu = [];
+    for (let bank of bankList) {
+      loginMenu.push(
+        <MenuItem primaryText={bank} leftIcon={<CreditCard color={styles.svgColor}/>}  onTouchTap={this.bankMenuClick.bind(this, bank) }/>
+      )
+    }
+    return loginMenu;
+
+  }
 }
-
-function getBankMenu() {
-  return [
-    <MenuItem primaryText='中国银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-    <MenuItem primaryText='农业银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-    <MenuItem primaryText='建设银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-    <MenuItem primaryText='工商银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-    <MenuItem primaryText='交通银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-    <MenuItem primaryText='招商银行' leftIcon={<CreditCard color={styles.svgColor}/>} />,
-  ]
-}
-
-
 
 const styles = {
   drawer: {
@@ -104,5 +107,5 @@ const styles = {
     position: 'fixed',
     width: '100%'
   },
-  svgColor:  'rgba(0, 0, 0, 0.870588)'
+  svgColor: 'rgba(0, 0, 0, 0.870588)'
 }

@@ -25,6 +25,12 @@ const store = createStore(
 const history = syncHistoryWithStore(hashHistory, store)
 
 
+import {connect} from 'camo';
+connect('nedb://passyord').then(function(){
+  console.log('connected');
+});
+
+
 ReactDOM.render((
   <Provider store={store}>
     <Router history={history}>
@@ -32,4 +38,4 @@ ReactDOM.render((
       <Route path="/view" component={ViewApp}/>
     </Router>
   </Provider>
-), document.getElementById('app'))
+), document.getElementById('app'));

@@ -2,17 +2,16 @@
 
 import {Document} from 'camo';
 
-export default class LoginInfo extends Document {
+export default class BankInfo extends Document {
     constructor() {
         super();
 
-        this.webname = String;
-        this.url = String;
+        this.bankname = String;
         this.username = String;
         this.password = String;
     }
     static collectionName() {
-        return 'loginInfos';
+        return 'bankInfos';
     }
 
 }
