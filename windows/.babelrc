@@ -1,0 +1,9 @@
+{
+    "presets": [
+        "react",
+        "camo"
+    ],
+    "plugins": [
+        "transform-object-rest-spread"
+    ]
+}

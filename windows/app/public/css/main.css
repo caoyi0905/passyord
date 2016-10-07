@@ -1,0 +1,45 @@
+
+html{
+    height:100%;
+}
+
+body{
+    margin: 0px;
+    height:100%;
+}
+
+button{
+    -webkit-app-region: no-drag;
+}
+
+.navigationBtn svg{
+    color: white !important;
+}
+
+.input > input{
+    cursor: auto;
+    color: rgba(0, 0, 0, 0.870588) !important;
+}
+
+.actionBtn svg {
+    padding: 10px;
+    margin: -10px;
+    transition: none !important;
+}
+
+.actionBtn:hover svg {
+    border-radius: 50%;
+    background-color: rgb(200,200,200) !important;
+    color: white !important;
+}
+
+.closeBtn svg {
+    padding: 10px;
+    margin: -10px; 
+    transition: none !important;
+}
+
+.closeBtn:hover svg {
+    border-radius: 50%;
+    background-color: red !important;
+}
